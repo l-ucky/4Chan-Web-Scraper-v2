@@ -11,3 +11,4 @@ Consider doing your own data analysis. If you save your CSV, and make a pull req
 - After installing, and running this script into your RStudio IDE, you can download all posts.
 - Downloaded posts are then manipulated to show word frequencies.
 - Differs from V1 by scraping all replies to OP, and has a much larger noise filter.
+- Sentiment analysis is also performed.
