@@ -285,6 +285,18 @@ tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "whites", "white")
 tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "indians", "indian")
 tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "poos", "poo")
 tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "parties", "party")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "kikes", "jew")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "kike", "jew")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "glow", "glowie")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "glowies", "glowie")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "glows", "glowie")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "glowfags", "glowie")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "glowshills", "glowie")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "guyss", "guy")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "guys", "guy")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "shills", "shill")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "shilling", "shill")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "shilled", "shill")
 
 tidy_pol_fixed2 <- tidy_pol_fixed %>% 
   count(word, sort = TRUE) %>% 
