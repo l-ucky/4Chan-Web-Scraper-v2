@@ -1,4 +1,4 @@
-# 4 Chan Webscraper
+# 4 Chan Webscraper, Version 2
 **Highlights:**
 
 - Written in R.
