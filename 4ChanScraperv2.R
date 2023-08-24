@@ -5,6 +5,12 @@ library("tidyverse")
 library("ggplot2")
 library("wordcloud")
 library("tidytext")
+library("tinytex")
+library("syuzhet")
+library("lubridate")
+library("scales")
+library("reshape2")
+library("dplyr")
 
 # This scraping is getting all of the internal links
 
