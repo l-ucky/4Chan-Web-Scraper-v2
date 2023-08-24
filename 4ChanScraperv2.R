@@ -251,7 +251,18 @@ tidy_pol_fixed <- tidy_pol %>%
          & !word == "wpjizlog"
          & !word == "xxfbsv"
          & !word == "wsr"
+         & !word == "mon"
+         & !word == "tue"
+         & !word == "wed"
+         & !word == "thu"
+         & !word == "fri"
+         & !word == "sat"
+         & !word == "sun"
+         & !word == "tues"
          & !grepl("[^A-Za-z]", word))
+
+#below will replace a word with another word
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "niggers", "nigger")
 
 tidy_pol_fixed2 <- tidy_pol_fixed %>% 
   count(word, sort = TRUE) %>% 
