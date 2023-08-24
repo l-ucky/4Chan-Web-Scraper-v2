@@ -326,6 +326,16 @@ tidy_pol_fixed2 %>%
   with(wordcloud(word, n, max.words = 100, random.order = FALSE, rot.per = 0.0, 
                  colors = brewer.pal(8, "Dark2")))
 
+# Sentiment analysis, and visuals with a bar grapoh.
+# This will take a few minutes to process
+# On my Ryzen 7 3700X, and 16Gb of RAM, it took about 5 minutes.
+sentiment_tidy_pol_fixed_2 <- get_nrc_sentiment(tidy_pol_fixed2$word)
+
+barplot(colSums(sentiment_tidy_pol_fixed_2),
+        las = 2,
+        col = rainbow(10),
+        ylab = 'Count',
+        main = 'Pol Sentiment Scores')
 
 # Time to Save the Data
 timestamp <- format(Sys.time(), "%b %d %Y %X")
