@@ -1,4 +1,7 @@
 # 4 Chan Webscraper, Version 2
+
+Consider doing your own data analysis. If you save your CSV, and make a pull request, I can add it to this repository for plotting word usage changes over time.
+
 **Highlights:**
 
 - Written in R.
