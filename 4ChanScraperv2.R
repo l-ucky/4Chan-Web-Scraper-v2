@@ -328,5 +328,6 @@ tidy_pol_fixed2 %>%
 
 
 # Time to Save the Data
-# Make sure to change the date when saving to not overwrite the old data
-#write.csv(tidy_pol_fixed, "~/Documents/Stats/4Chan Scraper/Aug-22-2023-1116h.csv", row.names=FALSE)
+timestamp <- format(Sys.time(), "%b %d %Y %X")
+filename <- paste0("~/Documents/Stats/4Chan Scraper/",timestamp,".csv")  
+write.csv(tidy_pol_fixed2, file = filename)
