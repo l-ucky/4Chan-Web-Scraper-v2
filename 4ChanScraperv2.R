@@ -302,6 +302,14 @@ tidy_pol_fixed2 <- tidy_pol_fixed %>%
   count(word, sort = TRUE) %>% 
   print(n = 10)
 
+# Goodness of fit test ($\chi^2$). p-value < 0.05 = significant result that the 
+# observations are indepenent and vary in probabilities of showing up.
+
+top <- subset(tidy_pol_fixed2, tidy_pol_fixed2$n >= 200)
+chi <- chisq.test(top$n)
+options(scipen = 999) # removes scientific notation
+chi
+
 
 # Time to Visualize
 
