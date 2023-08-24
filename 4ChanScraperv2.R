@@ -264,6 +264,27 @@ tidy_pol_fixed <- tidy_pol %>%
 #below will replace a word with another word
 tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "niggers", "nigger")
 tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "jews", "jew")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "jewish", "jew")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "woman", "women")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "fucked", "fuck")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "fucks", "fuck")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "fuckers", "fuck")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "fuckin", "fuck")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "fucker", "fuck")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "retards", "retard")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "retarded", "retard")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "retardation", "retard")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "campaings", "campaign")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "posted", "posting")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "shitskins", "nigger")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "shitskin", "nigger")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "christians", "christian")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "israeli", "israel")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "guy", "guys")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "whites", "white")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "indians", "indian")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "poos", "poo")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "parties", "party")
 
 tidy_pol_fixed2 <- tidy_pol_fixed %>% 
   count(word, sort = TRUE) %>% 
