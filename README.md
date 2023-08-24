@@ -6,7 +6,7 @@ Consider doing your own data analysis. If you save your CSV, and make a pull req
 
 - Written in R.
 - Objective: Datamining text, and displaying word frequencies.
-- Uses the following libraries: rvest, tidyverse, tidytext, ggplot2, wordcloud.
+- Uses the following libraries: rvest, tidyverse, tidytext, ggplot2, wordcloud, tinytex, syuzhet, scales, reshape2, and dplyr.
 - If you don't have these installed in your RStudio software, then install them.
 - After installing, and running this script into your RStudio IDE, you can download all posts.
 - Downloaded posts are then manipulated to show word frequencies.
