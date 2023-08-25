@@ -54,7 +54,7 @@ df_difference_filter %>%
   ggplot(aes(word, result)) +
   geom_col() + 
   labs(
-    title = "difference of word count from day 1 - day 2",
+    title = "Difference of Word Count from Day 1 - Day 2",
     x = "Words",
     y = "Count") +
   coord_flip()
