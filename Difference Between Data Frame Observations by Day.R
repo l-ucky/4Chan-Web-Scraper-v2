@@ -10,7 +10,7 @@ library("tidyverse")
 # Note: Other code is below to do an alternative method,
 #       but the uncommented method is superior.
 
-#load CSVs using code. 
+# Load CSVs using code. 
 df1 <- read.csv("~/Documents/Stats/4Chan Scraper/Aug 24 2023 18:11:19.csv")
 df2 <- read.csv("~/Documents/Stats/4Chan Scraper/Aug 25 2023 10:51:42.csv")
 
@@ -22,7 +22,7 @@ df_merged$result <- df_merged$n.y - df_merged$n.x
 
 
 
-# Feel free to add more "non-words," or "noise" 
+# Feel free to add more "non-words," or "noise," 
 # to this list as you see fit.
 df_difference_filter <- df_merged %>% 
   filter(!word == "de"
@@ -46,7 +46,7 @@ df_difference_filter <- df_merged %>%
          & !word == "bb"
          & !word == "op")
 
-# bar graph of difference
+# Bar graph of difference
 df_difference_filter %>% 
   top_n(40) %>% 
   mutate(word = reorder(word, result)) %>% 
@@ -60,7 +60,7 @@ df_difference_filter %>%
   coord_flip()
 
 
-#Assign CSV to data frame if loading in manually with the GUI/IDE.
+# Assign CSV to data frame if loading in manually with the GUI/IDE.
 # df1 <- `Aug.24.2023.18:11:19`
 # df2 <- `Aug.25.2023.10:51:42`
 
