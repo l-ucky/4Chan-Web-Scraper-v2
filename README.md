@@ -29,3 +29,11 @@ From the rvest::html_text website:
 There are two ways to retrieve text from a element: html_text() and html_text2(). html_text() is a thin wrapper around xml2::xml_text() which returns just the raw underlying text. html_text2() simulates how text looks in a browser, using an approach inspired by JavaScript's innerText(). Roughly speaking, it converts <br /> to "\n", adds blank lines around `<p>` tags, and lightly formats tabular data.
 
 html_text2() is usually what you want, but it is much slower than html_text() so for simple applications where performance is important you may want to use html_text() instead.
+
+# Calculating, and Displaying Post Frequency Differences
+
+I added an extra R script, with an example PDF output. In these files it takes the CSV the scraper auto-saves to your statistics directory, and imports the data set. Then, the top 20 positive, and top 20 negative numbers are taken from subtracting day 2 from day 1. So, if you see a negative number in the bar graph, then there were more mentions of the key word made on day 1, than on day 2. The opposite is also true: if you see a positive numbr in the bar graph, then there were less mentions made on day 1, than on day 2.
+
+I hope you find this additional script helpful.
+
+Please also consider sending me CSV files of your scrapes to this GitHub repository.
