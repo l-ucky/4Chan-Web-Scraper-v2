@@ -71,7 +71,6 @@ fill_bar <- case_when(
   df_merged2$result <= -100 ~ "darkgreen",
   df_merged2$result <= -50 ~ "seagreen",
   df_merged2$result <= 0 ~ "black",
-  # df_merged2$result >= 0 ~ "blue",
   df_merged2$result <= 50 ~ "slategray4",
   df_merged2$result <= 100 ~ "slateblue",
   df_merged2$result <= 150 ~ "steelblue3",
