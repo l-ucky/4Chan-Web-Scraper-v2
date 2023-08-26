@@ -79,7 +79,7 @@ fill_bar <- case_when(
 
 # bar graph of difference between Day 2, and Day 1.
 df_merged2 %>% 
-  top_n(40) %>% 
+  top_n(50) %>% 
   mutate(word = reorder(word, result)) %>%
   ggplot(aes(word, result)) +
   theme(legend.position = "none", axis.title.y = element_blank()) +
