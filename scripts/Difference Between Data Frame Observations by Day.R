@@ -66,7 +66,7 @@ df_merged2 <- rbind(df_top, df_bottom)
 
 # Colours results based on conditions.
 fill_bar <- case_when(
-  df_merged2$result < -200   ~ "red4",
+  df_merged2$result <= -200   ~ "red4",
   df_merged2$result <= -150 ~ "red1",
   df_merged2$result <= -100 ~ "darkgreen",
   df_merged2$result <= -50 ~ "seagreen",
