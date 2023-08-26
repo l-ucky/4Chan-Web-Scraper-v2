@@ -64,12 +64,27 @@ df_top <- df_difference_filter %>%
 # Bind into new data frame
 df_merged2 <- rbind(df_top, df_bottom)
 
+# Colours results based on conditions.
+fill_bar <- case_when(
+  df_merged2$result < -200   ~ "red4",
+  df_merged2$result <= -150 ~ "red1",
+  df_merged2$result <= -100 ~ "darkgreen",
+  df_merged2$result <= -50 ~ "seagreen",
+  df_merged2$result <= 0 ~ "black",
+  # df_merged2$result >= 0 ~ "blue",
+  df_merged2$result <= 50 ~ "slategray4",
+  df_merged2$result <= 100 ~ "slateblue",
+  df_merged2$result <= 150 ~ "steelblue3",
+  df_merged2$result <= 200 ~ "cyan4")
+
+
 # bar graph of difference between Day 2, and Day 1.
 df_merged2 %>% 
   top_n(40) %>% 
-  mutate(word = reorder(word, result)) %>% 
+  mutate(word = reorder(word, result)) %>%
   ggplot(aes(word, result)) +
-  geom_bar(stat = "identity") + 
+  theme(legend.position = "none", axis.title.y = element_blank()) +
+  geom_bar(stat = "identity", fill = fill_bar) +
   labs(
     title = "Difference of Word Count from Day 2 - Day 1",
     x = "Words",
