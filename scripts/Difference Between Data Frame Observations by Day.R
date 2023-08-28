@@ -12,8 +12,8 @@ library("dplyr")
 #       but the uncommented method is superior.
 
 #load CSVs using code. 
-df1 <- read.csv("~/Documents/Stats/4Chan Scraper/Aug 24 2023 18:11:19.csv")
-df2 <- read.csv("~/Documents/Stats/4Chan Scraper/Aug 25 2023 10:51:42.csv")
+df1 <- read.csv("~/Documents/Stats/4ChanScraper/Aug 24 2023 18:11:19.csv")
+df2 <- read.csv("~/Documents/Stats/4ChanScraper/Aug 25 2023 10:51:42.csv")
 
 
 # Merge data frame, and take difference b/w day 1 and day 2
