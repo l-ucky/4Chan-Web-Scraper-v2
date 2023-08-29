@@ -17,6 +17,7 @@ Consider doing your own data analysis. If you save your CSV, and make a pull req
 **Limitations**
 - 4chan will recycle poster IDs, so they are not unique identifiers. Therefore, the data mining on n-pbtid isn't fully accurate for the upper-bound, but it should be closer to representative at the lower-bound.
 - Time of day scrapes based on time-zone of interest (e.g. New York posting hours) hasn't been implemented, but this can be easily solved by scraping the threads from 0900h - 1700h by intervals of 3 hours to allow old threads to die, for your target local time.
+- Some synonyms will not be counted under a single word (e.g. glowie, glow, glows, glower), so manual input will need to be implemented in the v2 script. The same idea goes for plural words, but there is another package that will take root words, and remove word modifiers (e.g. -ing, -ed, -s, etc)
 
 # html_text vs html_text2 from rvest
 
