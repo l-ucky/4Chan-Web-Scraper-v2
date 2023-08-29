@@ -14,6 +14,10 @@ Consider doing your own data analysis. If you save your CSV, and make a pull req
 - Sentiment analysis is also performed.
 - **X number of "posts by this ID" with graphical representation.**
 
+**Limitations**
+- 4chan will recycle poster IDs, so they are not unique identifiers. Therefore, the data mining on n-pbtid isn't fully accurate for the upper-bound, but it should be closer to representative at the lower-bound.
+- Time of day scrapes based on time-zone of interest (e.g. New York posting hours) hasn't been implemented, but this can be easily solved by scraping the threads from 0900h - 1700h by intervals of 3 hours to allow old threads to die, for your target local time.
+
 # html_text vs html_text2 from rvest
 
 I did an experiment comparing the `tidy_pol_fixed2` output of text.
