@@ -12,6 +12,7 @@ Consider doing your own data analysis. If you save your CSV, and make a pull req
 - Downloaded posts are then manipulated to show word frequencies.
 - Differs from V1 by scraping all replies to OP, and has a much larger noise filter.
 - Sentiment analysis is also performed.
+- **X number of "posts by this ID" with graphical representation.**
 
 # html_text vs html_text2 from rvest
 
