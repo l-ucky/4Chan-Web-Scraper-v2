@@ -38,3 +38,12 @@ I added an extra R script, with an example PDF output. In these files it takes t
 I hope you find this additional script helpful.
 
 Please also consider sending me CSV files of your scrapes to this GitHub repository.
+
+# Sentiment Analysis
+
+I added a sentiment analysis which will categorize used words into several columns and count their occurances. I am using the NCR library.
+
+
+# X Posts by This ID
+
+I wrote a script for finding all unique IDs from all threads, and performed analysis on the number of posts per unique ID (e.g. 2 posts by this ID) and plotted the frequency of the number of posts across all threads. See the example for a more in-depth explanation.
