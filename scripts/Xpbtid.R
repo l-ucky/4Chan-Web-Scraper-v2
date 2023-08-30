@@ -105,7 +105,7 @@ threads_col_all <-data.frame(txt = c(t(threads_col)), stringsAsFactors=FALSE)
 # Also filters everything except: example -> "id_A1b2c45d"
 tidy_pol_IDs <- threads_col_all %>% 
   unnest_tokens(word, txt, format = "text") %>% 
-  filter(str_detect(word, "(id_[a-zA-z0-9]{8})"))
+  filter(str_detect(word, "(id_[a-zA-Z0-9]{8})"))
 
 
 # === Import CSV as tidy_pol_IDs ===
