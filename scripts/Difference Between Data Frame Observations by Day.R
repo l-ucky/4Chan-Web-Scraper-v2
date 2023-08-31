@@ -82,13 +82,15 @@ fill_bar <- case_when(
 df_merged2 %>% 
   top_n(50) %>% 
   mutate(word = reorder(word, result)) %>%
-  ggplot(aes(word, result)) +
+  ggplot(aes(word, result, fill = result)) +
   theme(legend.position = "none", axis.title.y = element_blank()) +
-  geom_bar(stat = "identity", fill = fill_bar) +
+  geom_bar(stat = "identity") +
   labs(
-    title = "Difference of Word Count from Day 2 - Day 1",
+    title = "Difference of Word Count from Today - Yesterday",
     x = "Words",
     y = "Count",
-    caption = "Positive integers = More mentions on day 2
-     Negative integers = Less mentions on day 2.") +
-  coord_flip()
+    caption = "Positive integers = More mentions today.
+     Negative integers = Less mentions today.",
+    fill = "Results") +
+  coord_flip() +
+  theme_dark(base_size = 13)
