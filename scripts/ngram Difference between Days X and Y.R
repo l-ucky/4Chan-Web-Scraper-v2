@@ -18,8 +18,8 @@ df2 <- read.csv("~/Documents/Stats/4ChanScraper/ngram Aug 31 2023 12:08:28.csv")
 
 # Merge data frame, and take difference b/w day 1 and day 2
 # subtracting data frames from each other.
-# X.x = df1
-# X.y = df2
+# n.x = df1
+# n.y = df2
 df_merged <- merge(df1, df2, by="word", all=TRUE)
 # For ngram below
 df_merged$result <- df_merged$n.y - df_merged$n.x
