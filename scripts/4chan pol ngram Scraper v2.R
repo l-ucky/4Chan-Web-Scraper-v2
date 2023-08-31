@@ -11,6 +11,7 @@ library("lubridate")
 library("scales")
 library("reshape2")
 library("dplyr")
+library("qdapDictionaries")
 
 # This scraping is getting all of the internal links
 
@@ -320,7 +321,9 @@ tidy_pol_fixed_separated <- tidy_pol_fixed %>%
          & !word1 == "rhr"
          & !word1 == "fvcc"
          & !word1 == "ygpd"
-         & !word1 == "lel") %>% 
+         & !word1 == "lel"
+         & !word1 == "announcement"
+         & !grepl('[0-9]', word1)) %>% 
   filter(!word2 == "fucking"
         & !word2 == "https"
         & !word2 == "shit"
@@ -511,7 +514,9 @@ tidy_pol_fixed_separated <- tidy_pol_fixed %>%
         & !word2 == "fvcc"
         & !word2 == "fvcc"
         & !word2 == "ygpd"
-        & !word2 == "lel")
+        & !word2 == "lel"
+        & !word2 == "announcement"
+        & !grepl('[0-9]', word2))
 
 #### below will replace a word with another word ####
 tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "niggers", "nigger")
@@ -593,18 +598,20 @@ tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "e
 tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "catholics", "catholic")
 tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "masks", "mask")
 tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "threadsstop", "threads stop")
-#####
+tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "diplomatic", "diplomacy")
+####
 
 
 tidy_pol_united <- tidy_pol_fixed_separated %>%
   filter(!word1 %in% stop_words$word,
-         !word2 %in% stop_words$word) %>%
+         !word2 %in% stop_words$word,
+         word1 %in% GradyAugmented,
+         word2 %in% GradyAugmented) %>%
   unite(word, c(word1, word2), sep = " ")
-
 
 tidy_pol_fixed2 <- tidy_pol_united %>% 
   count(word, sort = TRUE) %>% 
-  print(n=61)
+  print(n=70)
 
 
 # =========== Time to Visualize ===========
@@ -613,18 +620,18 @@ tidy_pol_fixed2 %>%
   top_n(60) %>% 
   mutate(word = reorder(word, n)) %>% 
   ggplot(aes(word, n)) +
-  geom_col(fill = "darkblue") + 
-  xlab("Words") +
-  ylab("Count") +
-  labs(title = "Most Used Word Pairs") +
+  geom_bar(stat = "identity", fill = "steelblue4") +
+  labs(title = "Most Used Word Pairs",
+    x = "Words",
+    y = "Count") +
   coord_flip() +
-  theme_dark()
+  theme_dark(base_size = 12.5)
 
 tidy_pol_fixed2 %>% 
-  with(wordcloud(word, n, max.words = 50, scale = c(2,0.5), random.order = FALSE, rot.per = 0.0, 
-                 colors = brewer.pal(9, "Dark2")))
+  with(wordcloud(word, n, max.words = 50, scale = c(1.5,0.75), random.order = FALSE, rot.per = 0.0, 
+                 colors = brewer.pal(8, "Dark2")))
 
 # Time to Save the Data
 timestamp <- format(Sys.time(), "%b %d %Y %X")
-filename <- paste0("~/Documents/Stats/4ChanScraper/ngram",timestamp,".csv")  
+filename <- paste0("~/Documents/Stats/4ChanScraper/ngram ",timestamp,".csv")  
 write.csv(tidy_pol_fixed2, file = filename)
