@@ -102,7 +102,7 @@ df_links$txt <- paste("https://boards.4chan.org/pol/", df_links$txt, sep = "")
 # to each row in the data frame
 threads <- lapply(df_links$txt, function(x) {
   read_html(x) %>%
-    html_text()})
+    html_text2()})
 
 # Turn "threads" into a tibble so tidytex can manipulate it
 threads_tibble <- tibble(txt = threads)
