@@ -322,11 +322,14 @@ chi
 tidy_pol_fixed2 %>% 
   top_n(50) %>% 
   mutate(word = reorder(word, n)) %>% 
-  ggplot(aes(word, n)) +
+  ggplot(aes(word, n, fill = n)) +
   geom_col() + 
-  xlab("Words") +
-  ylab("Count") +
-  coord_flip()
+  labs(title = "Most Used Words",
+       x = "Words",
+       y = "Count",
+       fill = "Results") +
+  coord_flip() +
+  theme_dark(base_size = 12.5)
 
 tidy_pol_fixed2 %>% 
   with(wordcloud(word, n, max.words = 100, random.order = FALSE, rot.per = 0.0, 
