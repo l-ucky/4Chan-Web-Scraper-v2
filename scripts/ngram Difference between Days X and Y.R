@@ -92,6 +92,7 @@ df_merged2 %>%
     x = "Words",
     y = "Count",
     caption = "Positive integers = More mentions today. 
-    Negative integers = Less mentions today.") +
+    Negative integers = Less mentions today.",
+  fill = "Results") +
   coord_flip() +
   theme_dark(base_size = 13)
