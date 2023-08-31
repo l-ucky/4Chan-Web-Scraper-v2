@@ -22,7 +22,7 @@ df2 <- read.csv("~/Documents/Stats/4ChanScraper/ngram Aug 31 2023 12:08:28.csv")
 # X.y = df2
 df_merged <- merge(df1, df2, by="word", all=TRUE)
 # For ngram below
-df_merged$result <- df_merged$X.y - df_merged$X.x
+df_merged$result <- df_merged$n.y - df_merged$n.x
 
 
 # Feel free to add more "non-words," or "noise" 
@@ -68,30 +68,30 @@ df_merged2 <- rbind(df_top, df_bottom)
 
 
 # Colours results based on conditions.
-ngram_fill_bar <- case_when(
-  df_merged2$result < -22000   ~ "red4",
-  df_merged2$result <= -20000 ~ "red1",
-  df_merged2$result <= -19000 ~ "darkgreen",
-  df_merged2$result <= -18000 ~ "seagreen",
-  df_merged2$result <= 0 ~ "black",
-  df_merged2$result <= 20000 ~ "slategray4",
-  df_merged2$result <= 21000 ~ "slateblue",
-  df_merged2$result <= 23000 ~ "steelblue3",
-  df_merged2$result <= 25000 ~ "cyan4")
+# ngram_fill_bar <- case_when(
+#   df_merged2$result < -90   ~ "red4",
+#   df_merged2$result <= -70 ~ "red1",
+#   df_merged2$result <= -30 ~ "darkgreen",
+#   df_merged2$result <= -10 ~ "seagreen",
+#   df_merged2$result <= 0 ~ "black",
+#   df_merged2$result <= 10 ~ "slategray4",
+#   df_merged2$result <= 30 ~ "slateblue",
+#   df_merged2$result <= 70 ~ "steelblue3",
+#   df_merged2$result <= 90 ~ "cyan4")
 
 
 # bar graph of difference between Day 2, and Day 1.
 df_merged2 %>% 
   top_n(50) %>% 
   mutate(word = reorder(word, result)) %>%
-  ggplot(aes(word, result)) +
-  theme(legend.position = "none", axis.title.y = element_blank()) +
-  geom_bar(stat = "identity", fill = ngram_fill_bar) +
+  ggplot(aes(word, result, fill = result)) +
+  theme(legend.position = "left") +
+  geom_bar(stat = "identity") +
   labs(
     title = "Difference of Word Pairs from Today - Yesterday",
     x = "Words",
     y = "Count",
-    caption = "Positive integers = More mentions today.
-     Negative integers = Less mentions today.") +
+    caption = "Positive integers = More mentions today. 
+    Negative integers = Less mentions today.") +
   coord_flip() +
   theme_dark(base_size = 13)
