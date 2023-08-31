@@ -22,6 +22,8 @@ Consider doing your own data analysis. If you save your CSV, and make a pull req
 
 # html_text vs html_text2 from rvest
 
+**I changed my mind. Using html_text2 will correct run-on words that don't naturally belong together. (e.g. webmhello)**
+
 I did an experiment comparing the `tidy_pol_fixed2` output of text.
 
 html_text = 21776 observations
