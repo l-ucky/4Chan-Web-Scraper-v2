@@ -66,6 +66,14 @@ df_top <- df_difference_filter %>%
 # Bind into new data frame
 df_merged2 <- rbind(df_top, df_bottom)
 
+# Gets rid of pair-word noise.
+# Add as needed.
+df_merged2 <- df_merged2 %>% 
+  filter(!word == "niggers niggers"
+         & !word == "nigger nigger"
+         & !word == "based based"
+         & !word == "jew jew"
+         & !word == "niggers niggers")
 
 # Colours results based on conditions.
 # ngram_fill_bar <- case_when(
