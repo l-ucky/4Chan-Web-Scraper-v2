@@ -111,21 +111,8 @@ threads_tibble <- tibble(txt = threads)
 tidy_pol <- threads_tibble %>% 
   unnest_tokens(word, txt, format = "text", token = "ngrams", n = 2, to_lower = TRUE)
 
-
-
-
 tidy_pol_fixed <- tidy_pol %>%
   filter(str_detect(word, "([a-z]{3,} [a-z]{3,})"))
-
-# Failures
-# tidy_pol_fixed2 <- tidy_pol_fixed %>% 
-#   filter(str_detect(word, "[_]{1,}"))
-# tidy_pol_fixed <- tidy_pol %>%
-#   filter(str_detect(word, "([\\w\\S_])"))
-# tidy_pol_fixed <- tidy_pol %>%
-#   filter(!grepl("[a-z] [a-z]", word))
-# tidy_pol_fixed <- tidy_pol %>%
-#   filter(str_detect(word, "([\\d-] [\\S-])"))
 
 
 tidy_pol_fixed_separated <- tidy_pol_fixed %>%  
@@ -517,7 +504,7 @@ tidy_pol_fixed_separated <- tidy_pol_fixed %>%
          & !grepl('[0-9]', word2))
 
 #### below will replace a word with another word ####
-#tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "niggers", "nigger")
+tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "niggers", "nigger")
 tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "jews", "jew")
 tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "jewish", "jew")
 tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "woman", "women")
@@ -557,7 +544,7 @@ tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "c
 tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "masks", "mask")
 tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "threadsstop", "threads stop")
 
-#tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "niggers", "nigger")
+tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "niggers", "nigger")
 tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "jews", "jew")
 tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "jewish", "jew")
 tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "woman", "women")
