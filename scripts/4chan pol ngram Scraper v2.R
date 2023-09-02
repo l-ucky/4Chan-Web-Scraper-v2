@@ -12,7 +12,6 @@ library("scales")
 library("reshape2")
 library("dplyr")
 library("qdapDictionaries")
-
 # This scraping is getting all of the internal links
 
 #Page 1 Scrape
@@ -113,21 +112,20 @@ tidy_pol <- threads_tibble %>%
   unnest_tokens(word, txt, format = "text", token = "ngrams", n = 2, to_lower = TRUE)
 
 
-# tidy_pol_fixed <- tidy_pol %>%
-#   filter(!grepl("[a-z] [a-z]", word))
-# 
-# 
-# tidy_pol_fixed <- tidy_pol %>%
-#   filter(str_detect(word, "([\\d-] [\\S-])"))
+
 
 tidy_pol_fixed <- tidy_pol %>%
   filter(str_detect(word, "([a-z]{3,} [a-z]{3,})"))
 
+# Failures
 # tidy_pol_fixed2 <- tidy_pol_fixed %>% 
 #   filter(str_detect(word, "[_]{1,}"))
-# 
 # tidy_pol_fixed <- tidy_pol %>%
 #   filter(str_detect(word, "([\\w\\S_])"))
+# tidy_pol_fixed <- tidy_pol %>%
+#   filter(!grepl("[a-z] [a-z]", word))
+# tidy_pol_fixed <- tidy_pol %>%
+#   filter(str_detect(word, "([\\d-] [\\S-])"))
 
 
 tidy_pol_fixed_separated <- tidy_pol_fixed %>%  
@@ -325,201 +323,201 @@ tidy_pol_fixed_separated <- tidy_pol_fixed %>%
          & !word1 == "announcement"
          & !grepl('[0-9]', word1)) %>% 
   filter(!word2 == "fucking"
-        & !word2 == "https"
-        & !word2 == "shit"
-        & !word2 == "id"
-        & !word2 == "anonymous"
-        & !word2 == "wed"
-        & !word2 == "kb"
-        & !word2 == "var"
-        & !word2 == "png"
-        & !word2 == "mobile"
-        & !word2 == "mb"
-        & !word2 == "catalog"
-        & !word2 == "settings"
-        & !word2 == "display"
-        & !word2 == "advertise"
-        & !word2 == "pass"
-        & !word2 == "bottom"
-        & !word2 == "pol"
-        & !word2 == "shit"
-        & !word2 == "jpg"
-        & !word2 == "view"
-        & !word2 == "vp"
-        & !word2 == "ad"
-        & !word2 == "tv"
-        & !word2 == "fit"
-        & !word2 == "post"
-        & !word2 == "thread"
-        & !word2 == "hr"
-        & !word2 == "gif"
-        & !word2 == "webm"
-        & !word2 == "incorrect"
-        & !word2 == "tg"
-        & !word2 == "comments"
-        & !word2 == "search"
-        & !word2 == "top"
-        & !word2 == "site"
-        & !word2 == "home"
-        & !word2 == "reply"
-        & !word2 == "board"
-        & !word2 == "politically"
-        & !word2 == "return"
-        & !word2 == "time"
-        & !word2 == "owned"
-        & !word2 == "added"
-        & !word2 == "vip"
-        & !word2 == "users"
-        & !word2 == "rules"
-        & !word2 == "legal"
-        & !word2 == "lgbt"
-        & !word2 == "lit"
-        & !word2 == "file"
-        & !word2 == "mu"
-        & !word2 == "hide"
-        & !word2 == "fa"
-        & !word2 == "responsibility"
-        & !word2 == "style"
-        & !word2 == "options"
-        & !word2 == "table"
-        & !word2 == "page"
-        & !word2 == "serve"
-        & !word2 == "contact"
-        & !word2 == "images"
-        & !word2 == "international"
-        & !word2 == "poster"
-        & !word2 == "people"
-        & !word2 == "true"
-        & !word2 == "bant"
-        & !word2 == "vm"
-        & !word2 == "vmg"
-        & !word2 == "vrpg"
-        & !word2 == "vst"
-        & !word2 == "read"
-        & !word2 == "news"
-        & !word2 == "image"
-        & !word2 == "posts"
-        & !word2 == "jp"
-        & !word2 == "sci"
-        & !word2 == "vg"
-        & !word2 == "po"
-        & !word2 == "toy"
-        & !word2 == "vt"
-        & !word2 == "wg"
-        & !word2 == "biz"
-        & !word2 == "ck"
-        & !word2 == "desktop"
-        & !word2 == "enable"
-        & !word2 == "feedback"
-        & !word2 == "int"
-        & !word2 == "verification"
-        & !word2 == "respective"
-        & !word2 == "vr"
-        & !word2 == "wsg"
-        & !word2 == "aco"
-        & !word2 == "adv"
-        & !word2 == "delete"
-        & !word2 == "cm"
-        & !word2 == "disable"
-        & !word2 == "bfutababurichantomorrowphoton"
-        & !word2 == "cgl"
-        & !word2 == "comlen"
-        & !word2 == "cooldowns"
-        & !word2 == "copyrights"
-        & !word2 == "cssversion"
-        & !word2 == "diy"
-        & !word2 == "gd"
-        & !word2 == "hc"
-        & !word2 == "ic"
-        & !word2 == "incorrectreturn"
-        & !word2 == "jsversion"
-        & !word2 == "maxfilesize"
-        & !word2 == "maxlines"
-        & !word2 == "mlp"
-        & !word2 == "payment"
-        & !word2 == "postform"
-        & !word2 == "pw"
-        & !word2 == "qa"
-        & !word2 == "qst"
-        & !word2 == "recaptcha"
-        & !word2 == "refresh"
-        & !word2 == "replyreturn"
-        & !word2 == "soc"
-        & !word2 == "sp"
-        & !word2 == "trademarks"
-        & !word2 == "trv"
-        & !word2 == "uploaded"
-        & !word2 == "hm"
-        & !word2 == "xs"
-        & !word2 == "yotsubayotsuba"
-        & !word2 == "boards"
-        & !word2 == "faq"
-        & !word2 == "announcementcrypto"
-        & !word2 == "bolsheviknatonazihippiepiraterepublicantask"
-        & !word2 == "bypass"
-        & !word2 == "capitalistanarchistblack"
-        & !word2 == "flaggeographic"
-        & !word2 == "huggerunited"
-        & !word2 == "locationanarcho"
-        & !word2 == "login"
-        & !word2 == "nationalistconfederatecommunistcataloniademocrateuropeanfascistgadsdengayjihadikekistanimuslimnational"
-        & !word2 == "nationswhite"
-        & !word2 == "refreshpost"
-        & !word2 == "supremacistfileplease"
-        & !word2 == "ztemplartree"
-        & !word2 == "posters"
-        & !word2 == "wpjizlog"
-        & !word2 == "xxfbsv"
-        & !word2 == "wsr"
-        & !word2 == "mon"
-        & !word2 == "tue"
-        & !word2 == "wed"
-        & !word2 == "thu"
-        & !word2 == "fri"
-        & !word2 == "sat"
-        & !word2 == "sun"
-        & !word2 == "tues"
-        & !word2 == "emyqupza"
-        & !word2 == "nlcbzjyk"
-        & !word2 == "oq"
-        & !word2 == "4chanvar"
-        & !word2 == "style_group"
-        & !word2 == "17new"
-        & !word2 == "oq"
-        & !word2 == "www.youtube.com"
-        & !word2 == "fsy"
-        & !word2 == "gmzv"
-        & !word2 == "pzd"
-        & !word2 == "2ufe"
-        & !word2 == "bwi"
-        & !word2 == "5zpr"
-        & !word2 == "cke"
-        & !word2 == "clr3"
-        & !word2 == "vex"
-        & !word2 == "oqvc3qmvz0i"
-        & !word2 == "doc_strangelove"
-        & !word2 == "en.wikipedia.org"
-        & !word2 == "magyar"
-        & !word2 == "cygany"
-        & !word2 == "hxri"
-        & !word2 == "kvan"
-        & !word2 == "egr"
-        & !word2 == "akq"
-        & !word2 == "wiki"
-        & !word2 == "archive.org"
-        & !word2 == "details"
-        & !word2 == "een"
-        & !word2 == "ujhs"
-        & !word2 == "rhr"
-        & !word2 == "fvcc"
-        & !word2 == "fvcc"
-        & !word2 == "ygpd"
-        & !word2 == "lel"
-        & !word2 == "announcement"
-        & !grepl('[0-9]', word2))
+         & !word2 == "https"
+         & !word2 == "shit"
+         & !word2 == "id"
+         & !word2 == "anonymous"
+         & !word2 == "wed"
+         & !word2 == "kb"
+         & !word2 == "var"
+         & !word2 == "png"
+         & !word2 == "mobile"
+         & !word2 == "mb"
+         & !word2 == "catalog"
+         & !word2 == "settings"
+         & !word2 == "display"
+         & !word2 == "advertise"
+         & !word2 == "pass"
+         & !word2 == "bottom"
+         & !word2 == "pol"
+         & !word2 == "shit"
+         & !word2 == "jpg"
+         & !word2 == "view"
+         & !word2 == "vp"
+         & !word2 == "ad"
+         & !word2 == "tv"
+         & !word2 == "fit"
+         & !word2 == "post"
+         & !word2 == "thread"
+         & !word2 == "hr"
+         & !word2 == "gif"
+         & !word2 == "webm"
+         & !word2 == "incorrect"
+         & !word2 == "tg"
+         & !word2 == "comments"
+         & !word2 == "search"
+         & !word2 == "top"
+         & !word2 == "site"
+         & !word2 == "home"
+         & !word2 == "reply"
+         & !word2 == "board"
+         & !word2 == "politically"
+         & !word2 == "return"
+         & !word2 == "time"
+         & !word2 == "owned"
+         & !word2 == "added"
+         & !word2 == "vip"
+         & !word2 == "users"
+         & !word2 == "rules"
+         & !word2 == "legal"
+         & !word2 == "lgbt"
+         & !word2 == "lit"
+         & !word2 == "file"
+         & !word2 == "mu"
+         & !word2 == "hide"
+         & !word2 == "fa"
+         & !word2 == "responsibility"
+         & !word2 == "style"
+         & !word2 == "options"
+         & !word2 == "table"
+         & !word2 == "page"
+         & !word2 == "serve"
+         & !word2 == "contact"
+         & !word2 == "images"
+         & !word2 == "international"
+         & !word2 == "poster"
+         & !word2 == "people"
+         & !word2 == "true"
+         & !word2 == "bant"
+         & !word2 == "vm"
+         & !word2 == "vmg"
+         & !word2 == "vrpg"
+         & !word2 == "vst"
+         & !word2 == "read"
+         & !word2 == "news"
+         & !word2 == "image"
+         & !word2 == "posts"
+         & !word2 == "jp"
+         & !word2 == "sci"
+         & !word2 == "vg"
+         & !word2 == "po"
+         & !word2 == "toy"
+         & !word2 == "vt"
+         & !word2 == "wg"
+         & !word2 == "biz"
+         & !word2 == "ck"
+         & !word2 == "desktop"
+         & !word2 == "enable"
+         & !word2 == "feedback"
+         & !word2 == "int"
+         & !word2 == "verification"
+         & !word2 == "respective"
+         & !word2 == "vr"
+         & !word2 == "wsg"
+         & !word2 == "aco"
+         & !word2 == "adv"
+         & !word2 == "delete"
+         & !word2 == "cm"
+         & !word2 == "disable"
+         & !word2 == "bfutababurichantomorrowphoton"
+         & !word2 == "cgl"
+         & !word2 == "comlen"
+         & !word2 == "cooldowns"
+         & !word2 == "copyrights"
+         & !word2 == "cssversion"
+         & !word2 == "diy"
+         & !word2 == "gd"
+         & !word2 == "hc"
+         & !word2 == "ic"
+         & !word2 == "incorrectreturn"
+         & !word2 == "jsversion"
+         & !word2 == "maxfilesize"
+         & !word2 == "maxlines"
+         & !word2 == "mlp"
+         & !word2 == "payment"
+         & !word2 == "postform"
+         & !word2 == "pw"
+         & !word2 == "qa"
+         & !word2 == "qst"
+         & !word2 == "recaptcha"
+         & !word2 == "refresh"
+         & !word2 == "replyreturn"
+         & !word2 == "soc"
+         & !word2 == "sp"
+         & !word2 == "trademarks"
+         & !word2 == "trv"
+         & !word2 == "uploaded"
+         & !word2 == "hm"
+         & !word2 == "xs"
+         & !word2 == "yotsubayotsuba"
+         & !word2 == "boards"
+         & !word2 == "faq"
+         & !word2 == "announcementcrypto"
+         & !word2 == "bolsheviknatonazihippiepiraterepublicantask"
+         & !word2 == "bypass"
+         & !word2 == "capitalistanarchistblack"
+         & !word2 == "flaggeographic"
+         & !word2 == "huggerunited"
+         & !word2 == "locationanarcho"
+         & !word2 == "login"
+         & !word2 == "nationalistconfederatecommunistcataloniademocrateuropeanfascistgadsdengayjihadikekistanimuslimnational"
+         & !word2 == "nationswhite"
+         & !word2 == "refreshpost"
+         & !word2 == "supremacistfileplease"
+         & !word2 == "ztemplartree"
+         & !word2 == "posters"
+         & !word2 == "wpjizlog"
+         & !word2 == "xxfbsv"
+         & !word2 == "wsr"
+         & !word2 == "mon"
+         & !word2 == "tue"
+         & !word2 == "wed"
+         & !word2 == "thu"
+         & !word2 == "fri"
+         & !word2 == "sat"
+         & !word2 == "sun"
+         & !word2 == "tues"
+         & !word2 == "emyqupza"
+         & !word2 == "nlcbzjyk"
+         & !word2 == "oq"
+         & !word2 == "4chanvar"
+         & !word2 == "style_group"
+         & !word2 == "17new"
+         & !word2 == "oq"
+         & !word2 == "www.youtube.com"
+         & !word2 == "fsy"
+         & !word2 == "gmzv"
+         & !word2 == "pzd"
+         & !word2 == "2ufe"
+         & !word2 == "bwi"
+         & !word2 == "5zpr"
+         & !word2 == "cke"
+         & !word2 == "clr3"
+         & !word2 == "vex"
+         & !word2 == "oqvc3qmvz0i"
+         & !word2 == "doc_strangelove"
+         & !word2 == "en.wikipedia.org"
+         & !word2 == "magyar"
+         & !word2 == "cygany"
+         & !word2 == "hxri"
+         & !word2 == "kvan"
+         & !word2 == "egr"
+         & !word2 == "akq"
+         & !word2 == "wiki"
+         & !word2 == "archive.org"
+         & !word2 == "details"
+         & !word2 == "een"
+         & !word2 == "ujhs"
+         & !word2 == "rhr"
+         & !word2 == "fvcc"
+         & !word2 == "fvcc"
+         & !word2 == "ygpd"
+         & !word2 == "lel"
+         & !word2 == "announcement"
+         & !grepl('[0-9]', word2))
 
 #### below will replace a word with another word ####
-tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "niggers", "nigger")
+#tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "niggers", "nigger")
 tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "jews", "jew")
 tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "jewish", "jew")
 tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "woman", "women")
@@ -559,7 +557,7 @@ tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "c
 tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "masks", "mask")
 tidy_pol_fixed_separated$word1 <- str_replace(tidy_pol_fixed_separated$word1, "threadsstop", "threads stop")
 
-tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "niggers", "nigger")
+#tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "niggers", "nigger")
 tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "jews", "jew")
 tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "jewish", "jew")
 tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "woman", "women")
@@ -599,39 +597,51 @@ tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "c
 tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "masks", "mask")
 tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "threadsstop", "threads stop")
 tidy_pol_fixed_separated$word2 <- str_replace(tidy_pol_fixed_separated$word2, "diplomatic", "diplomacy")
-####
+
+#####
 
 
-tidy_pol_united <- tidy_pol_fixed_separated %>%
+tidy_pol_united_ngram<- tidy_pol_fixed_separated %>%
   filter(!word1 %in% stop_words$word,
          !word2 %in% stop_words$word,
          word1 %in% GradyAugmented,
          word2 %in% GradyAugmented) %>%
   unite(word, c(word1, word2), sep = " ")
 
-tidy_pol_fixed2 <- tidy_pol_united %>% 
+
+tidy_pol_fixed2_ngram <- tidy_pol_united_ngram %>% 
   count(word, sort = TRUE) %>% 
+  filter(!word == "niggers niggers"
+         & !word == "nigger nigger"
+         & !word == "based based"
+         & !word == "jew jew"
+         & !word == "niggers niggers") %>% 
   print(n=70)
 
 
 # =========== Time to Visualize ===========
+#tidy_pol_fixed2 <- read.csv("~/Documents/Stats/4ChanScraper/ngram Sep 01 2023 22:26:23.csv"  )
 
-tidy_pol_fixed2 %>% 
-  top_n(60) %>% 
+
+tidy_pol_fixed2_ngram %>% 
+  top_n(70) %>% 
   mutate(word = reorder(word, n)) %>% 
-  ggplot(aes(word, n)) +
-  geom_bar(stat = "identity", fill = "steelblue4") +
+  ggplot(aes(word, n, fill = n)) +
+  geom_bar(stat = "identity") +
   labs(title = "Most Used Word Pairs",
-    x = "Words",
-    y = "Count") +
+       x = "Words",
+       y = "Count",
+       fill = "Results") +
   coord_flip() +
   theme_dark(base_size = 12.5)
 
-tidy_pol_fixed2 %>% 
-  with(wordcloud(word, n, max.words = 50, scale = c(1.5,0.75), random.order = FALSE, rot.per = 0.0, 
+
+
+tidy_pol_fixed2_ngram %>% 
+  with(wordcloud(word, n, max.words = 75, scale = c(1.5,0.75), random.order = FALSE, rot.per = 0.0, 
                  colors = brewer.pal(8, "Dark2")))
 
 # Time to Save the Data
 timestamp <- format(Sys.time(), "%b %d %Y %X")
 filename <- paste0("~/Documents/Stats/4ChanScraper/ngram ",timestamp,".csv")  
-write.csv(tidy_pol_fixed2, file = filename)
+write.csv(tidy_pol_fixed, file = filename)
