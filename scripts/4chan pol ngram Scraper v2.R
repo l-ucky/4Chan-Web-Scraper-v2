@@ -631,4 +631,4 @@ tidy_pol_fixed2_ngram %>%
 # Time to Save the Data
 timestamp <- format(Sys.time(), "%b %d %Y %X")
 filename <- paste0("~/Documents/Stats/4ChanScraper/ngram ",timestamp,".csv")  
-write.csv(tidy_pol_fixed, file = filename)
+write.csv(tidy_pol_fixed2_ngram, file = filename)
