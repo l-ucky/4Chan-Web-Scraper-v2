@@ -30,8 +30,8 @@ html_text = 21776 observations
 
 html_text2 = 20004 observations
 
-I will continue using html_text because it contains more observations, which I can later filter out the noise as needed. 
-There were no substantial differences that I noticed in the graphs, so retaining a greater number of observations seems better than less.
+~~I will continue using html_text because it contains more observations, which I can later filter out the noise as needed. 
+There were no substantial differences that I noticed in the graphs, so retaining a greater number of observations seems better than less.~~
 
 From the rvest::html_text website:
 
