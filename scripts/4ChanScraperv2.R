@@ -11,7 +11,9 @@ library("lubridate")
 library("scales")
 library("reshape2")
 library("dplyr")
-
+library("qdapDictionaries")
+# library("tm") Dont need
+# library("qdap") Dont need
 # This scraping is getting all of the internal links
 
 #Page 1 Scrape
@@ -65,6 +67,10 @@ pol_threads10 <- read_html("https://boards.4channel.org/pol/10") %>%
   html_elements("a") %>%
   html_attr('href')
 
+# get_hrefs <- . %>% read_html %>% html_elements("a") %>%
+#   html_attr('href')
+# paste("https://boards.4channel.org/pol/", 1:9) %>% map_chr(get_hrefs)
+
 # Combining all of the threads into 1 data frame
 df_pol <-      c(pol_threads1, 
                  pol_threads2, 
@@ -106,6 +112,27 @@ threads_tibble <- tibble(txt = threads)
 # Break up all of the sentences into single words
 tidy_pol <- threads_tibble %>% 
   unnest_tokens(word, txt, format = "text")
+
+
+# Doesn't perform well
+# https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_text_3_quanteda.md
+# tidy_pol <- removeNumbers(tidy_pol$word) %>% 
+#   removePunctuation() %>% 
+#   stripWhitespace()
+# threads_tibble <- tibble(txt = tidy_pol)
+# tidy_pol <- threads_tibble %>% 
+#   unnest_tokens(word, txt, format = "text")
+# mutate(token_stem = wordStem(word))
+# tidy_pol_test <- as.list(tidy_pol)
+# tidy_pol_test2 <- tokens(tidy_pol_test)
+# tidy_pol_test3 <- tokens_wordstem(tidy_pol_test2)
+# tokens_rbind <- do.call(rbind, tidy_pol_test3)
+# tokens_col <- tibble(txt = tokens_rbind)
+# tokens_col_all <-data.frame(txt = c(t(tokens_col)), stringsAsFactors=FALSE)
+
+
+# Put this in the ngram script
+#filter(!grepl('[0-9]', word))
 
 
 tidy_pol_fixed <- tidy_pol %>%
@@ -265,7 +292,20 @@ tidy_pol_fixed <- tidy_pol %>%
          & !word == "sat"
          & !word == "sun"
          & !word == "tues"
-         & !grepl("[^A-Za-z]", word))
+         & !word == "emyqupza"
+         & !word == "nlcbzjyk"
+         & !word == "oq"
+         & !word == "avqxwczz"
+         & !word == "lot"
+         & !word == "day"
+         & !word == "guy"
+         & !word == "announcement"
+         & !word == "yeah"
+         & !word == "anon"
+         & !word == "watch"
+         & !grepl("[^A-Za-z]", word)
+         & !word == "[a-zA-Z]{,2}"
+         & word %in% GradyAugmented)
 
 #below will replace a word with another word
 tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "niggers", "nigger")
@@ -303,21 +343,63 @@ tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "guys", "guy")
 tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "shills", "shill")
 tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "shilling", "shill")
 tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "shilled", "shill")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "europeans", "european")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "catholics", "catholic")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "masks", "mask")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "russians", "russian")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "indians", "indian")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "catholics", "catholic")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "chinks", "chinese")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "chink", "chinese")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "gook", "japanese")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "gooks", "japanese")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "woman", "women")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "parties", "party")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "governments", "government")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "american", "america")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "faggots", "faggot")
+tidy_pol_fixed$word <- str_replace(tidy_pol_fixed$word, "campaigns", "campaign")
+
+# Add date
+date <- Sys.Date()
 
 tidy_pol_fixed2 <- tidy_pol_fixed %>% 
   count(word, sort = TRUE) %>% 
-  print(n = 10)
+  print(n = 20) %>% 
+  cbind(date)
 
 # Goodness of fit test ($\chi^2$). p-value < 0.05 = significant result that the 
 # observations are indepenent and vary in probabilities of showing up.
 
-top <- subset(tidy_pol_fixed2, tidy_pol_fixed2$n >= 200)
-chi <- chisq.test(top$n)
-options(scipen = 999) # removes scientific notation
-chi
+# top <- subset(tidy_pol_fixed2, tidy_pol_fixed2$n >= 200)
+# chi <- chisq.test(top$n)
+# options(scipen = 999) # removes scientific notation
+# chi
 
 
-# Time to Visualize
+# =========== Time to Visualize ===========
+
+# Import CSV as tidy_pol_fixed2
+#tidy_pol_fixed2 <- read.csv("~/Documents/Stats/4ChanScraper/csv/Aug 30 2023 18:00:58.csv")
+
+#experimenting with removing top words
+tidy_pol_fixed2 <- tidy_pol_fixed2 %>% 
+  filter(!word == "jew"
+         & !word == "nigger"
+         & !word == "white"
+         & !word == "fuck"
+         & !word == "women"
+         & !word == "faggot"
+         & !word == "world"
+         & !word == "posting"
+         & !word == "retard"
+         & !word == "real"
+         & !word == "learn"
+         & !word == "party"
+         & !word == "retard"
+         & !word == "country"
+         & !word == "america"
+         & !word == "life")
 
 tidy_pol_fixed2 %>% 
   top_n(50) %>% 
@@ -333,21 +415,21 @@ tidy_pol_fixed2 %>%
   theme_dark(base_size = 12.5)
 
 tidy_pol_fixed2 %>% 
-  with(wordcloud(word, n, max.words = 100, random.order = FALSE, rot.per = 0.0, 
+  with(wordcloud(word, n, max.words = 150, random.order = FALSE, rot.per = 0.0, 
                  colors = brewer.pal(8, "Dark2")))
 
 # Sentiment analysis, and visuals with a bar grapoh.
 # This will take a few minutes to process
 # On my Ryzen 7 3700X, and 16Gb of RAM, it took about 5 minutes.
-sentiment_tidy_pol_fixed_2 <- get_nrc_sentiment(tidy_pol_fixed2$word)
+#sentiment_tidy_pol_fixed_2 <- get_nrc_sentiment(tidy_pol_fixed2$word)
 
-barplot(colSums(sentiment_tidy_pol_fixed_2),
-        las = 2,
-        col = rainbow(10),
-        ylab = 'Count',
-        main = 'Pol Sentiment Scores')
+# barplot(colSums(sentiment_tidy_pol_fixed_2),
+#         las = 2,
+#         col = rainbow(10),
+#         ylab = 'Count',
+#         main = 'Pol Sentiment Scores')
 
 # Time to Save the Data
 timestamp <- format(Sys.time(), "%b %d %Y %X")
-filename <- paste0("~/Documents/Stats/4Chan Scraper/",timestamp,".csv")  
+filename <- paste0("~/Documents/Stats/4ChanScraper/",timestamp,".csv")  
 write.csv(tidy_pol_fixed2, file = filename)
