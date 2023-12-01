@@ -1,5 +1,8 @@
 # 4 Chan Webscraper, Version 2
 
+**Notice:**
+I will be reuploading all of the files with their appropriate dates attached into a column. I didn't include dates into the column and I don't know how I overlooked this. Oops. I have 100+ CSVs to edit, but I'm busy with exams right now. Maybe over Chrsitmas break.
+
 Consider doing your own data analysis. If you save your CSV, and make a pull request, I can add it to this repository for plotting word usage changes over time.
 
 **Highlights:**
@@ -13,6 +16,7 @@ Consider doing your own data analysis. If you save your CSV, and make a pull req
 - Differs from V1 by scraping all replies to OP, and has a much larger noise filter.
 - Sentiment analysis is also performed.
 - **X number of "posts by this ID" with graphical representation.**
+- Working on a "Word by Time Series" plot of word changes over time. I'll need to remove useless words to hone in on important (i.e. relevant) words. For example, "woman," isn't a relevant word, and it's just noise.
 
 **Limitations**
 - 4chan will recycle poster IDs, so they are not unique identifiers. Therefore, the data mining on n-pbtid isn't fully accurate for the upper-bound, but it should be closer to representative at the lower-bound.
