@@ -111,8 +111,21 @@ threads_tibble <- tibble(txt = threads)
 tidy_pol <- threads_tibble %>% 
   unnest_tokens(word, txt, format = "text", token = "ngrams", n = 2, to_lower = TRUE)
 
+
+
+
 tidy_pol_fixed <- tidy_pol %>%
   filter(str_detect(word, "([a-z]{3,} [a-z]{3,})"))
+
+# Failures
+# tidy_pol_fixed2 <- tidy_pol_fixed %>% 
+#   filter(str_detect(word, "[_]{1,}"))
+# tidy_pol_fixed <- tidy_pol %>%
+#   filter(str_detect(word, "([\\w\\S_])"))
+# tidy_pol_fixed <- tidy_pol %>%
+#   filter(!grepl("[a-z] [a-z]", word))
+# tidy_pol_fixed <- tidy_pol %>%
+#   filter(str_detect(word, "([\\d-] [\\S-])"))
 
 
 tidy_pol_fixed_separated <- tidy_pol_fixed %>%  
@@ -595,6 +608,8 @@ tidy_pol_united_ngram<- tidy_pol_fixed_separated %>%
          word2 %in% GradyAugmented) %>%
   unite(word, c(word1, word2), sep = " ")
 
+# Add date
+date <- Sys.Date()
 
 tidy_pol_fixed2_ngram <- tidy_pol_united_ngram %>% 
   count(word, sort = TRUE) %>% 
@@ -602,16 +617,18 @@ tidy_pol_fixed2_ngram <- tidy_pol_united_ngram %>%
          & !word == "nigger nigger"
          & !word == "based based"
          & !word == "jew jew"
-         & !word == "niggers niggers") %>% 
+         & !word == "niggers niggers"
+         & !word == "baking baking") %>% 
+  cbind(date) %>% 
   print(n=70)
 
 
 # =========== Time to Visualize ===========
-#tidy_pol_fixed2 <- read.csv("~/Documents/Stats/4ChanScraper/ngram Sep 01 2023 22:26:23.csv"  )
+#tidy_pol_fixed2_ngram <- read.csv("~/Documents/Stats/4ChanScraper/csv/ngram Sep 01 2023 22:26:23.csv")
 
 
 tidy_pol_fixed2_ngram %>% 
-  top_n(70) %>% 
+  top_n(50) %>% 
   mutate(word = reorder(word, n)) %>% 
   ggplot(aes(word, n, fill = n)) +
   geom_bar(stat = "identity") +
@@ -625,10 +642,10 @@ tidy_pol_fixed2_ngram %>%
 
 
 tidy_pol_fixed2_ngram %>% 
-  with(wordcloud(word, n, max.words = 75, scale = c(1.5,0.75), random.order = FALSE, rot.per = 0.0, 
+  with(wordcloud(word, n, max.words = 100, scale = c(2,1), random.order = FALSE, rot.per = 0.0, 
                  colors = brewer.pal(8, "Dark2")))
 
 # Time to Save the Data
 timestamp <- format(Sys.time(), "%b %d %Y %X")
-filename <- paste0("~/Documents/Stats/4ChanScraper/ngram ",timestamp,".csv")  
-write.csv(tidy_pol_fixed2_ngram, file = filename)
+filename <- paste0("~/Documents/Stats/4ChanScraper/csv/ngram ",timestamp,".csv")  
+write.csv(tidy_pol_fixed, file = filename)
